@@ -14,9 +14,6 @@ RUN R -e "renv::restore(confirm=FALSE)"
 
 ENV TERCEN_SERVICE_URI https://tercen.com
 
-#RUN pwd
-#RUN ls -al
-#COPY main.R /main.R
-
-ENTRYPOINT [ "R","--no-save","--no-restore","--no-environ","--slave","-f","main.R"]
+ENTRYPOINT [ "R","--no-save","--no-restore","--no-environ","--slave","-f","main.R","--args"]
+CMD [ "--taskId", "someid", "--serviceUri", "https://tercen.com", "--token", "sometoken"]
 
