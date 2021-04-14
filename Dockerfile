@@ -3,23 +3,19 @@ FROM tercen/dartrusttidy:1.0.7
 USER root
 WORKDIR /operator
 
-RUN git clone https://github.com/tercen/OPERATOR_NAME.git
+RUN apt-get update
+RUN apt-get install -y libtiff-tools
 
-WORKDIR /operator/OPERATOR_NAME
+RUN git clone https://github.com/ginberg/xshift_operator.git
 
-RUN echo X.X.X && git pull
-RUN git checkout X.X.X
+WORKDIR /operator/xshift_operator
+
+RUN echo 0.0.1_ && git pull
+RUN git checkout 0.0.1
 
 RUN R -e "renv::restore(confirm=FALSE)"
 
 ENV TERCEN_SERVICE_URI https://tercen.com
 
-COPY start.R /start.R
-
-ENTRYPOINT [ "R","--no-save","--no-restore","--no-environ","--slave","-f","/start.R"]
-
-
-
-
-
-
+ENTRYPOINT [ "R","--no-save","--no-restore","--no-environ","--slave","-f","main.R","--args"]
+CMD [ "--taskId", "someid", "--serviceUri", "https://tercen.com", "--token", "sometoken"]
