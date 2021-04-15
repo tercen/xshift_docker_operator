@@ -1,8 +1,8 @@
 {
-  "name": "Xshift",
+  "name": "XSHIFT",
   "description": "Single-cell analysis, clustering and visualization.",
-  "tags": ["docker java xshift clustering"],
-  "authors": ["ginberg"],
+  "tags": ["xshift clustering"],
+  "authors": ["tercen"],
   "urls": ["https://github.com/ginberg/xshift_docker_operator"],
   "container": "ginberg/xshift:0.0.1",
   "isWebApp": false
