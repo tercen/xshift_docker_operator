@@ -9,11 +9,11 @@ RUN apt-get -y update && apt-get install -y \
    && apt-get clean \
    && rm -rf /var/lib/apt/lists/
 
-RUN echo 0.0.2 && git clone https://github.com/ginberg/xshift_operator.git
+RUN echo 0.0.1 && git clone https://github.com/ginberg/xshift_operator.git
 
 WORKDIR /operator/xshift_operator
 
-RUN echo 0.0.1_ && git pull
+RUN echo 0.0.1 && git pull
 #RUN git checkout 0.0.1
 
 RUN R -e "renv::restore(confirm=FALSE)"
@@ -25,9 +25,6 @@ RUN unzip -j VorteX.26-Apr-2018.zip
 RUN rm VorteX.26-Apr-2018.zip
 
 COPY input/BM2_cct_normalized_01_non-Neutrophils.fcs BM2_cct_normalized_01_non-Neutrophils.fcs
-#COPY input/fcsFileList.txt fcsFileList.txt
-#COPY input/importConfig.txt importConfig.txt
-#COPY input/start.sh start.sh 
 
 ENTRYPOINT [ "R","--no-save","--no-restore","--no-environ","--slave","-f","main.R","--args"]
 CMD [ "--taskId", "someid", "--serviceUri", "https://tercen.com", "--token", "sometoken"]
