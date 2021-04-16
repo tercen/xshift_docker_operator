@@ -4,7 +4,7 @@
   "tags": ["xshift clustering"],
   "authors": ["tercen"],
   "urls": ["https://github.com/ginberg/xshift_docker_operator"],
-  "container": "ginberg/xshift:0.0.1",
+  "container": "ginberg/xshift:0.0.2",
   "isWebApp": false
 }
 

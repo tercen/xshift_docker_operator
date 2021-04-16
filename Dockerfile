@@ -13,7 +13,7 @@ RUN git clone https://github.com/ginberg/xshift_operator.git
 
 WORKDIR /operator/xshift_operator
 
-RUN echo 0.0.9 && git pull
+RUN echo 0.0.10 && git pull
 #RUN git checkout 0.0.1
 
 RUN echo 'options("tercen.serviceUri"="http://tercen:5400/api/v1/")' >> /usr/local/lib/R/etc/Rprofile.site && \
