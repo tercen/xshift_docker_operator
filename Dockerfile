@@ -1,4 +1,4 @@
-FROM tercen/dartrusttidy:4.0.3-0
+FROM tercen/runtime-r40:4.0.4-0
 
 USER root
 WORKDIR /operator
@@ -13,8 +13,20 @@ RUN git clone https://github.com/ginberg/xshift_operator.git
 
 WORKDIR /operator/xshift_operator
 
-RUN echo 0.0.8 && git pull
+RUN echo 0.0.9 && git pull
 #RUN git checkout 0.0.1
+
+RUN echo 'options("tercen.serviceUri"="http://tercen:5400/api/v1/")' >> /usr/local/lib/R/etc/Rprofile.site && \
+    echo 'options("tercen.username"="admin")' >> /usr/local/lib/R/etc/Rprofile.site && \
+    echo 'options("tercen.password"="admin")' >> /usr/local/lib/R/etc/Rprofile.site && \
+    echo 'options(renv.consent = TRUE)' >> /usr/local/lib/R/etc/Rprofile.site && \
+    echo 'options(repos=c(TERCEN="https://cran.tercen.com/api/v1/rlib/tercen",\
+     CRAN="https://cran.tercen.com/api/v1/rlib/CRAN", \
+     BioCsoft="https://cran.tercen.com/api/v1/rlib/BioCsoft-3.12", \
+     BioCann="https://cran.tercen.com/api/v1/rlib/BioCann-3.12", \
+     BioCexp="https://cran.tercen.com/api/v1/rlib/BioCexp-3.12", \
+     BioCworkflows="https://cran.tercen.com/api/v1/rlib/BioCworkflows-3.12" \
+     ))' >> /usr/local/lib/R/etc/Rprofile.site
 
 RUN R -e "renv::restore(confirm=FALSE)"
 
