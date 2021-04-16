@@ -13,8 +13,8 @@ RUN git clone https://github.com/ginberg/xshift_operator.git
 
 WORKDIR /operator/xshift_operator
 
-RUN echo 0.0.1 && git pull
-RUN git checkout 0.0.1
+RUN echo 0.0.8 && git pull
+#RUN git checkout 0.0.1
 
 RUN R -e "renv::restore(confirm=FALSE)"
 
