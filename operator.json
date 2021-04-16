@@ -1,5 +1,5 @@
 {
-  "name": "XSHIFT",
+  "name": "XSHIFT docker",
   "description": "Single-cell analysis, clustering and visualization.",
   "tags": ["xshift clustering"],
   "authors": ["tercen"],
