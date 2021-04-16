@@ -9,7 +9,7 @@ RUN apt-get -y update && apt-get install -y \
    && apt-get clean \
    && rm -rf /var/lib/apt/lists/
 
-RUN echo 0.0.1 && git clone https://github.com/ginberg/xshift_operator.git
+RUN echo 0.0.4 && git clone https://github.com/ginberg/xshift_operator.git
 
 WORKDIR /operator/xshift_operator
 
@@ -24,7 +24,7 @@ RUN wget https://github.com/nolanlab/vortex/releases/download/26-Apr-2018/VorteX
 RUN unzip -j VorteX.26-Apr-2018.zip
 RUN rm VorteX.26-Apr-2018.zip
 
-COPY input/BM2_cct_normalized_01_non-Neutrophils.fcs BM2_cct_normalized_01_non-Neutrophils.fcs
+#COPY input/BM2_cct_normalized_01_non-Neutrophils.fcs BM2_cct_normalized_01_non-Neutrophils.fcs
 
 ENTRYPOINT [ "R","--no-save","--no-restore","--no-environ","--slave","-f","main.R","--args"]
 CMD [ "--taskId", "someid", "--serviceUri", "https://tercen.com", "--token", "sometoken"]
