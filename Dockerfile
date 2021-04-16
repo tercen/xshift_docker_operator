@@ -9,12 +9,12 @@ RUN apt-get -y update && apt-get install -y \
    && apt-get clean \
    && rm -rf /var/lib/apt/lists/
 
-RUN echo 0.0.6 && git clone https://github.com/ginberg/xshift_operator.git
+RUN git clone https://github.com/ginberg/xshift_operator.git
 
 WORKDIR /operator/xshift_operator
 
 RUN echo 0.0.1 && git pull
-#RUN git checkout 0.0.1
+RUN git checkout 0.0.1
 
 RUN R -e "renv::restore(confirm=FALSE)"
 
