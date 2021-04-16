@@ -9,10 +9,6 @@ RUN apt-get -y update && apt-get install -y \
    && apt-get clean \
    && rm -rf /var/lib/apt/lists/
 
-RUN wget https://github.com/nolanlab/vortex/releases/download/26-Apr-2018/VorteX.26-Apr-2018.zip
-RUN unzip -j VorteX.26-Apr-2018.zip
-RUN rm VorteX.26-Apr-2018.zip
-
 RUN git clone https://github.com/ginberg/xshift_operator.git
 
 WORKDIR /operator/xshift_operator
@@ -31,6 +27,10 @@ RUN echo 'options("tercen.serviceUri"="http://tercen:5400/api/v1/")' >> /usr/loc
      BioCexp="https://cran.tercen.com/api/v1/rlib/BioCexp-3.12", \
      BioCworkflows="https://cran.tercen.com/api/v1/rlib/BioCworkflows-3.12" \
      ))' >> /usr/local/lib/R/etc/Rprofile.site
+
+RUN wget https://github.com/nolanlab/vortex/releases/download/26-Apr-2018/VorteX.26-Apr-2018.zip
+RUN unzip -j VorteX.26-Apr-2018.zip
+RUN rm VorteX.26-Apr-2018.zip
 
 RUN R -e "renv::restore(confirm=FALSE)"
 
