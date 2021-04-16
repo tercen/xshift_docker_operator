@@ -9,7 +9,7 @@ RUN apt-get -y update && apt-get install -y \
    && apt-get clean \
    && rm -rf /var/lib/apt/lists/
 
-RUN echo 0.0.5 && git clone https://github.com/ginberg/xshift_operator.git
+RUN echo 0.0.6 && git clone https://github.com/ginberg/xshift_operator.git
 
 WORKDIR /operator/xshift_operator
 
