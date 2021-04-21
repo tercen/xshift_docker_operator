@@ -25,7 +25,7 @@ ctx = tercenCtx()
 
 # create fcs file
 fcs_filename  <- "input.fcs"
-clusters      <- ctx$rselect() %>% pull(gs0.variable)
+clusters      <- ctx$rselect() %>% pull()
 res           <- t(ctx$as.matrix())
 colnames(res) <- clusters
 frame         <- flowCore::flowFrame(res)

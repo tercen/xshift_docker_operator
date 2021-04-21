@@ -1,0 +1,6 @@
+xshift_operator/renv/library/
+xshift_operator/renv/local/
+xshift_operator/renv/lock/
+xshift_operator/renv/python/
+xshift_operator/renv/staging/
+.dockerignore
