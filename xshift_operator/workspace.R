@@ -16,10 +16,9 @@ options(scipen = 999)
 
 fcs_to_data = function(filename) {
   data_fcs = read.FCS(filename, transformation = FALSE)
-  data = as.data.frame(exprs(data_fcs)) %>% select(cluster_id)
-  data %>%
-    mutate_if(is.logical, as.character) %>%
-    mutate_if(is.integer, as.double)
+  as.data.frame(exprs(data_fcs)) %>% 
+    select(cluster_id) %>%
+    mutate(cluster_id = as.character(cluster_id))
 }
 
 ctx = tercenCtx()
