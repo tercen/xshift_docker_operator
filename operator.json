@@ -8,12 +8,6 @@
   "isWebApp": false,
   "properties": [
   {
-    "kind": "DoubleProperty",
-    "name": "limit_events_per_file",
-    "defaultValue": 100,
-    "description": "if the limit is different from 0, a specified amount of events get imported from the beginning of the file. This limits the total size of the dataset, which generally shall not exceed 1M cells."
-  },
-  {
     "kind": "StringProperty",
     "name": "num_nearest_neighbors",
     "defaultValue": "",

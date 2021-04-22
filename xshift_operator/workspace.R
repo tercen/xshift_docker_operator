@@ -16,16 +16,10 @@ options(scipen = 999)
 
 fcs_to_data = function(filename) {
   data_fcs = read.FCS(filename, transformation = FALSE)
-  names_parameters = data_fcs@parameters@data$desc
-  data = as.data.frame(exprs(data_fcs))
-  col_names = colnames(data)
-  names_parameters = ifelse(is.na(names_parameters),col_names,names_parameters)
-  colnames(data) = names_parameters
+  data = as.data.frame(exprs(data_fcs)) %>% select(cluster_id)
   data %>%
     mutate_if(is.logical, as.character) %>%
-    mutate_if(is.integer, as.double) %>%
-    mutate(.ci = rep_len(0, nrow(.))) %>%
-    mutate(filename = rep_len(basename(filename), nrow(.)))
+    mutate_if(is.integer, as.double)
 }
 
 ctx = tercenCtx()
@@ -40,8 +34,7 @@ write.FCS(frame, fcs_filename)
 
 # create fcsFileList.txt
 write.table(fcs_filename, file = "fcsFileList.txt", col.names = FALSE, row.names = FALSE, quote = FALSE)
-# create importConfig.txt
-limit_events_per_file = ifelse(is.null(ctx$op.value('limit_events_per_file')), 100, as.numeric(ctx$op.value('limit_events_per_file')))
+
 num_nearest_neighbors = ctx$op.value('num_nearest_neighbors')
 if (is.null(num_nearest_neighbors)) {
   num_nearest_neighbors <- ""
@@ -56,9 +49,11 @@ if (is.null(num_nearest_neighbors)) {
   }
 }
 
+# create importConfig.txt
+cluster_columns <- paste(seq(ncol(res)), collapse = ",")
 write.properties(file = file("importConfig.txt"),
-                 properties = list(clustering_columns         = "4,5,6,7,8,9,10",
-                                   limit_events_per_file      = as.character(limit_events_per_file),
+                 properties = list(clustering_columns         = cluster_columns,
+                                   limit_events_per_file      = "-1",
                                    transformation             = "ASINH",
                                    scaling_factor             = "5",
                                    noise_threshold            = "1.0",
@@ -71,6 +66,6 @@ system(paste("java -Xmx32G -cp VorteX.jar -Djava.awt.headless=true standalone.Xs
 
 # read output and write to tercen
 fcs_to_data(file.path("out", fcs_filename)) %>%
-  bind_rows() %>%
+  mutate(.ci = seq_len(nrow(.)) - 1) %>%
   ctx$addNamespace() %>%
   ctx$save()
