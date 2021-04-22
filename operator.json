@@ -3,8 +3,8 @@
   "description": "Single-cell analysis, clustering and visualization.",
   "tags": ["xshift clustering"],
   "authors": ["tercen"],
-  "urls": ["https://github.com/ginberg/xshift_docker_operator"],
-  "container": "ginberg/xshift:0.0.5",
+  "urls": ["https://github.com/tercen/xshift_docker_operator"],
+  "container": "ginberg/xshift:0.0.6",
   "isWebApp": false,
   "properties": [
   {
