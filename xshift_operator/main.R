@@ -59,6 +59,7 @@ system(paste("java -Xmx32G -cp VorteX.jar -Djava.awt.headless=true standalone.Xs
 
 # read output and write to tercen
 fcs_to_data(file.path("out", fcs_filename)) %>%
+  as_tibble() %>%
   mutate(.ci = seq_len(nrow(.)) - 1) %>%
   ctx$addNamespace() %>%
   ctx$save()
