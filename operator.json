@@ -16,7 +16,7 @@
   {
     "kind": "EnumeratedProperty",
     "name": "transformation",
-    "defaultValue": "",
+    "defaultValue": "NONE",
     "description": "Numerical transformation is essential to ensure that the expression values on each channel are approximately normally distributed.",
     "values": [
       "NONE",
@@ -27,19 +27,19 @@
   {
     "kind": "DoubleProperty",
     "name": "scaling_factor",
-    "defaultValue": "5",
+    "defaultValue": 5,
     "description": "A factor by which each value gets divided before transformation. 5 is default, but could be set to 3 or lower in order to improve cluster separation on low-intensity channels."
   },
   {
     "kind": "DoubleProperty",
     "name": "noise_threshold",
-    "defaultValue": "1.0",
+    "defaultValue": 1.0,
     "description": "A specified noise threshold will be subtracted from every raw value and then all the negative values will be set to zero. This filters out low-lever noise and GREATLY improves clustering in many dimensions."
   },
   {
     "kind": "DoubleProperty",
     "name": "euclidian_length_threshold",
-    "defaultValue": "0.0",
+    "defaultValue": 0.0,
     "description": "Setting this limit above 0 excludes events that have low intensity on all channels (unstained cells)."
   },
   {
@@ -56,13 +56,13 @@
   {
     "kind": "DoubleProperty",
     "name": "quantile",
-    "defaultValue": "0.95",
+    "defaultValue": 0.95,
     "description": "If quantile rescaling is selected, a quantile on which the rescaling is based should be specified here."
   },
   {
     "kind": "BooleanProperty",
     "name": "rescale_separately",
-    "defaultValue": "false",
+    "defaultValue": false,
     "description": "Rescaling each file separately may help equalizing the variance between runs."
   }
   ]
