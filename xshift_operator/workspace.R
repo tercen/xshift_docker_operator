@@ -47,19 +47,26 @@ if (is.null(num_nearest_neighbors)) {
     num_nearest_neighbors <- as.numeric(num_nearest_neighbors)
   }
 }
+transformation             = ifelse(is.null(ctx$op.value('transformation')), "ASINH", ctx$op.value('transformation'))
+scaling_factor             = ifelse(is.null(ctx$op.value('scaling_factor')), "5", ctx$op.value('scaling_factor'))
+noise_threshold            = ifelse(is.null(ctx$op.value('noise_threshold')), "1.0", ctx$op.value('noise_threshold'))
+euclidian_length_threshold = ifelse(is.null(ctx$op.value('euclidian_length_threshold')), "0.0", ctx$op.value('euclidian_length_threshold'))
+rescale                    = ifelse(is.null(ctx$op.value('rescale')), "NONE", ctx$op.value('rescale'))
+quantile                   = ifelse(is.null(ctx$op.value('quantile')), "0.95", ctx$op.value('quantile'))
+rescale_separately         = ifelse(is.null(ctx$op.value('rescale_separately')), "false", ctx$op.value('rescale_separately'))
 
-# create importConfig.txt
 cluster_columns <- paste(seq(ncol(res)), collapse = ",")
+# create importConfig.txt
 write.properties(file = file("importConfig.txt"),
                  properties = list(clustering_columns         = cluster_columns,
                                    limit_events_per_file      = "-1",
-                                   transformation             = "ASINH",
-                                   scaling_factor             = "5",
-                                   noise_threshold            = "1.0",
-                                   euclidian_length_threshold = "0.0",
-                                   rescale                    = "NONE",
-                                   quantile                   = "0.95",
-                                   rescale_separately         = "false"))
+                                   transformation             = transformation,
+                                   scaling_factor             = scaling_factor,
+                                   noise_threshold            = noise_threshold,
+                                   euclidian_length_threshold = euclidian_length_threshold,
+                                   rescale                    = rescale,
+                                   quantile                   = quantile,
+                                   rescale_separately         = rescale_separately))
 
 system(paste("java -Xmx32G -cp VorteX.jar -Djava.awt.headless=true standalone.Xshift", num_nearest_neighbors))
 

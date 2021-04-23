@@ -12,6 +12,58 @@
     "name": "num_nearest_neighbors",
     "defaultValue": "",
     "description": "Optional parameter NUM_NEAREST_NEIGHBORS is defining the resolution of density estimate and hence indirectly controls the number of clusters. If omitted, the clustering will run with the default setting of K=20. Keeping this default setting is recommended for the first pass because the runtime will be fast and the result is likely to be close to the optimal. Setiing the parameter to 'auto' instead of will lead to the algorithm running through an automatically determined range of K values and then selecting the optimal clustering via the elbow method."
+  },
+  {
+    "kind": "EnumeratedProperty",
+    "name": "transformation",
+    "defaultValue": "",
+    "description": "Numerical transformation is essential to ensure that the expression values on each channel are approximately normally distributed.",
+    "values": [
+      "NONE",
+      "ASINH",
+      "DOUBLE_ASINH"
+      ]
+  },
+  {
+    "kind": "DoubleProperty",
+    "name": "scaling_factor",
+    "defaultValue": "5",
+    "description": "A factor by which each value gets divided before transformation. 5 is default, but could be set to 3 or lower in order to improve cluster separation on low-intensity channels."
+  },
+  {
+    "kind": "DoubleProperty",
+    "name": "noise_threshold",
+    "defaultValue": "1.0",
+    "description": "A specified noise threshold will be subtracted from every raw value and then all the negative values will be set to zero. This filters out low-lever noise and GREATLY improves clustering in many dimensions."
+  },
+  {
+    "kind": "DoubleProperty",
+    "name": "euclidian_length_threshold",
+    "defaultValue": "0.0",
+    "description": "Setting this limit above 0 excludes events that have low intensity on all channels (unstained cells)."
+  },
+  {
+    "kind": "EnumeratedProperty",
+    "name": "rescale",
+    "defaultValue": "NONE",
+    "description": "Rescaling of clustering channels may help equalizing the extent to which high- and low-expressed markers influence clustering.",
+    "values": [
+      "NONE",
+      "SD",
+      "QUANTILE"
+      ]
+  },
+  {
+    "kind": "DoubleProperty",
+    "name": "quantile",
+    "defaultValue": "0.95",
+    "description": "If quantile rescaling is selected, a quantile on which the rescaling is based should be specified here."
+  },
+  {
+    "kind": "BooleanProperty",
+    "name": "rescale_separately",
+    "defaultValue": "false",
+    "description": "Rescaling each file separately may help equalizing the variance between runs."
   }
   ]
 }
