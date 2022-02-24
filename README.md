@@ -2,7 +2,7 @@
 
 ##### Description
 
-This is a docker wrapper for the xshift operator.
+This is a docker wrapper for the [xshift operator](https://github.com/tercen/xshift_docker_operator/tree/master/xshift_operator)
 
 ##### Build & Run
 
